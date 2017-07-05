@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add">Añadir</string>
+    <string name="add_flight_dialog_hint_airline">Aerolínea</string>
+    <string name="add_flight_dialog_hint_flight_number">Número de vuelo</string>
+    <string name="add_flight_dialog_title">Por favor ingrese su información de vuelo</string>
+    <string name="cancel">Cancelar</string>
+    <string name="deals">Ofertas</string>
+    <string name="empty_flights_message">NO TIENES VUELOS</string>
+    <string name="flight_added_msg">Vuelo Añadido</string>
+    <string name="my_flights">Mis vuelos</string>
+    <string name="navigation_drawer_close">Cierre el cajón de navegación</string>
+    <string name="navigation_drawer_open">Abrir el cajón de navegación</string>
+    <string name="searching_flight">Buscando Vuelos…</string>
+    <string name="settings">Ajustes</string>
+    <string name="unexpected_error">Error Inesperado</string>
+    <string name="language">Idioma</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="english">Has seleccionado Ingles</string>
+    <string name="spanish">Has seleccionado Español</string>
+    <string name="nothing">Nada que seleccionar</string>
+    <string-array name="language"> 
+        <item>Inglés</item> 
+        <item>Español</item> 
+    </string-array>
+    <string-array name="fetch_new_data"> 
+        <item>Cada 1 Minuto</item> 
+        <item>Cada 5 Minutos</item> 
+        <item>Cada 15 Minutos</item> 
+        <item>Cada 30 Minutos</item> 
+    </string-array>
+    <string name="flight_details">DETALLES DEL VUELO</string>
+    <string name="action_change_view">Vista</string>
+    <string name="action_search">Buscar</string>
+    <string name="fetch_new_data">Actualización de vuelos</string>
+    <string name="search">Buscar</string>
+    <string name="search_deals_dialog_msg">Por favor introduzca la ubicación de salida</string>
+    <string name="city_or_airport">Ciudad o Aeropuerto</string>
+    <string name="could_not_connect_to_googlemaps">No se pudo conectar a GoogleMaps</string>
+    <string name="empty_airline">El campo de aerolínea está vacío!</string>
+    <string name="empty_departure_location">El campo de ubicación de salida está vacío!</string>
+    <string name="empty_flight_number">El campo de número de vuelo esta vacío!</string>
+    <string name="invalid_flight">Vuelo no encontrado, vuelve a intentarlo</string>
+    <string name="invalid_from">Ubicación de salida no encontrada, vuelve a intentarlo</string>
+    <string name="missing_airline">Aerolínea no encontrada</string>
+    <string name="missing_departure_location">Ubicación de salida no encontrada</string>
+    <string name="missing_flight_number">Número de vuelo no encontrado</string>
+    <string name="searching_deals">Buscando Ofertas</string>
+    <string name="under_construction">En construcción…</string>
+    <string name="arrival">Llegada</string>
+    <string name="baggage">Equipaje</string>
+    <string name="button_undo">deshacer</string>
+    <string name="departure">Salida</string>
+    <string name="flight_already_present">Vuelo ya guardado.</string>
+    <string name="flight_stats_unknown">desconocido</string>
+    <string name="flight_status">Estado</string>
+    <string name="flight_status_active">activo</string>
+    <string name="flight_status_cancelled">cancelado</string>
+    <string name="flight_status_diverted">desviado</string>
+    <string name="flight_status_landed">aterrizado</string>
+    <string name="flight_status_scheduled">programado</string>
+    <string name="found">Encontrado</string>
+    <string name="gate">Puerta</string>
+    <string name="item_deleted">Eliminado</string>
+    <string name="loading_flights">Cargando…</string>
+    <string name="no_deals_found">No se encontraron ofertas, intente de nuevo</string>
+    <string name="terminal">Terminal</string>
+    <string name="price_">Precio</string>
+    <string name="no_flight_selected">Ningún vuelo seleccionado</string>
+    <string name="update">Actualizar</string>
+    <string name="updating_flights">Actualizando…</string>
+</resources>

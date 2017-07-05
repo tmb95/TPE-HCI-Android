@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name" translatable="false">SkyWatch</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Drawer options -->
+    <string name="my_flights">My flights</string>
+    <string name="deals">Deals</string>
+    <string name="settings">Settings</string>
+
+    <!-- Add flight Dialog -->
+    <string name="add_flight_dialog_title">Please enter your flight information</string>
+    <string name="add_flight_dialog_hint_airline">Airline</string>
+    <string name="add_flight_dialog_hint_flight_number">Flight number</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="flight_added_msg">Flight Added</string>
+
+    <string name="searching_flight">Searching Flight…</string>
+    <string name="empty_flights_message">YOU HAVE NO FLIGHTS</string>
+
+    <string name="flight_details">Flight details</string>
+
+    <string name="fetch_new_data">Flight updates</string>
+    <string name="language">Language</string>
+    <string name="notifications">Notifications</string>
+    <string name="english">You have selected English</string>
+    <string name="spanish">You have selected Spanish</string>
+    <string name="nothing">Nothing to select</string>
+    <string name="could_not_connect_to_googlemaps">Could not connect to GoogleMaps</string>
+
+    <string-array name="fetch_new_data"> 
+        <item>Every 1 Minute</item> 
+        <item>Every 5 Minutes</item> 
+        <item>Every 15 Minutes</item> 
+        <item>Every 30 Minutes</item> 
+    </string-array>
+     
+    <string-array name="language"> 
+        <item>English</item> 
+        <item>Spanish</item> 
+    </string-array>
+
+    <string name="api_key" translatable="false">AIzaSyBtRLPh_YupBqA8_3cwYU5Sxys3avDIoCI</string>
+    <string name="action_search">Search</string>
+    <string name="action_change_view">View</string>
+
+    <string name="search_deals_dialog_msg">Please enter departure location</string>
+    <string name="search">Search</string>
+    <string name="searching_deals">Searching Deals</string>
+    <string name="city_or_airport">City or Airport</string>
+    <string name="under_construction">Under construction…</string>
+
+    <!-- Error messages -->
+    <string name="missing_flight_number">Missing flight number</string>
+    <string name="missing_airline">Missing airline</string>
+    <string name="invalid_flight">Flight not found, try again</string>
+    <string name="unexpected_error">Unexpected Error</string>
+
+    <string name="empty_departure_location">Departure location is empty!</string>
+    <string name="empty_airline">Airline is empty!</string>
+    <string name="empty_flight_number">Flight number is empty!</string>
+    <string name="invalid_from">Departure location not found, try again</string>
+    <string name="missing_departure_location">Missing departure location</string>
+    <string name="no_deals_found">No deals found, try again</string>
+    <string name="found">Found</string>
+    <string name="price_">Price</string>
+    <string name="flight_already_present">Flight already saved.</string>
+    <string name="button_undo">undo</string>
+    <string name="flight_status">Status</string>
+    <string name="departure">Departure</string>
+    <string name="terminal">Terminal</string>
+    <string name="gate">Gate</string>
+    <string name="arrival">Arrival</string>
+    <string name="baggage">Baggage Gate</string>
+    <string name="flight_status_scheduled">scheduled</string>
+    <string name="flight_status_active">active</string>
+    <string name="flight_status_diverted">diverted</string>
+    <string name="flight_status_landed">landed</string>
+    <string name="flight_status_cancelled">cancelled</string>
+    <string name="flight_stats_unknown">unknown</string>
+    <string name="loading_flights">Loading…</string>
+    <string name="item_deleted">Deleted</string>
+    <string name="no_flight_selected">No flight selected</string>
+    <string name="updating_flights">Updating Flights…</string>
+    <string name="update">Update</string>
+
+</resources>

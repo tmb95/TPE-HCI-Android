@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "866505391321",
+    "firebase_url": "https://hci-tp2.firebaseio.com",
+    "project_id": "hci-tp2",
+    "storage_bucket": "hci-tp2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866505391321:android:0e5d91ef4942ec71",
+        "android_client_info": {
+          "package_name": "hci.skywatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866505391321-onosr3q6i26l59ahc8qltvhg2chi4o67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_nx4ayQOpGjunHxp22W3raEWs7DTW6n0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

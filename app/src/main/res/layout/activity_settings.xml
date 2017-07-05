@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include3"
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/include3"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/language"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/fetch_new_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/language"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/fetch_new_data"
+        android:textColor="@android:color/black" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/language_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/language"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:entries="@array/language"
+        android:spinnerMode="dialog" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/fetch_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fetch_new_data"
+        android:layout_alignBottom="@+id/fetch_new_data"
+        android:layout_alignEnd="@+id/language_spinner"
+        android:entries="@array/fetch_new_data"
+        android:spinnerMode="dialog" />
+
+</RelativeLayout>
