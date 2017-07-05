@@ -1,34 +1,26 @@
 package hci.skywatch;
 
 import android.app.PendingIntent;
-import android.content.*;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.gson.Gson;
 
-import java.util.Locale;
-
+import hci.skywatch.adapters.FlightAdapter;
 import hci.skywatch.fragments.AddFlightDialogFragment;
-import hci.skywatch.fragments.FlightAdapter;
 import hci.skywatch.fragments.FlightDetailsFragment;
 import hci.skywatch.fragments.MyFlightsFragment;
 import hci.skywatch.model.Flight;
@@ -104,86 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                // Do something when action item collapses
-                return true;  // Return true to collapse action view
-            }
-
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                // Do something when expanded
-                return true;  // Return true to expand action view
-            }
-        });
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            public boolean onQueryTextChange(String newText) {
-                Log.d("AppBar", "onQueryTextChange -> " + newText);
-                myFlightsFragment.getAdapter().getFilter().filter(newText);
-                return true;
-            }
-
-            public boolean onQueryTextSubmit(String query) {
-                Log.d("AppBar", "onQueryTextSubmit -> " + query);
-//                Toast.makeText(getApplicationContext(), "Under construction...", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.action_change_view:
-                toggleView(item);
-                return true;
-            case R.id.action_update:
-                performUpdate();
-                return true;
-            case R.id.action_settings:
-                Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public static boolean detailsView;
-
-    private void toggleView(MenuItem item) {
-        if (item.getItemId() != R.id.action_change_view) {
-            return;
-        }
-
-        Drawable detailsViewIcon = getDrawable(R.drawable.ic_view_details);
-        Drawable listView = getDrawable(R.drawable.ic_view_list);
-
-        if (detailsView) {
-            item.setIcon(listView);
-        } else {
-            item.setIcon(detailsViewIcon);
-        }
-
-        detailsView = !detailsView;
-        if (myFlightsFragment != null) {
-            myFlightsFragment.onFlightViewChanged();
-        }
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Change view when navigation drawer button is pressed
         int id = item.getItemId();
@@ -230,12 +142,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
-    private void performUpdate() {
-        if (myFlightsFragment != null) {
-            myFlightsFragment.updateFlights();
-        }
-    }
 
 //    @Override
 //    protected void attachBaseContext(Context newBase) {

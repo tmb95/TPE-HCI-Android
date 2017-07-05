@@ -1,6 +1,8 @@
 package hci.skywatch.model;
 
-public class Flight {
+import hci.skywatch.adapters.SearchAdapter;
+
+public class Flight implements SearchAdapter.FilterableItem {
 
     private final Integer id;
     private final Integer number;
@@ -82,5 +84,9 @@ public class Flight {
         return airline.getId() + number;
     }
 
+    @Override
+    public boolean contains(String query) {
+        return getName().contains(query) || getDeparture().getAirport().getId().contains(query);
+    }
 }
 
