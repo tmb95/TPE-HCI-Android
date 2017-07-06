@@ -38,35 +38,21 @@ import hci.skywatch.views.CustomRecyclerView;
  */
 public class FlightAdapter extends RecyclerView.Adapter {
 
-    private static ImageLoader imageLoader;
-
-    private static final int PENDING_REMOVAL_TIMEOUT = 3000; // 3sec
-
     private List<Flight> items;
     private List<Flight> itemsPendingRemoval;
 
-    private boolean undoOn = true; // is undo on, you can turn it on with the setUndoOn method
-
-    private Handler handler = new Handler(); // handler for running delayed runnables
-    private HashMap<Flight, Runnable> pendingRunnables = new HashMap<>(); // map of items to pending runnables, so we can cancel a removal if need be
-
-    private OnClickListener listener;
+    private ImageLoader imageLoader;
 
     private OnFlightRemovedListener onFlightRemovedListener;
-
     private FlightViewHolder.Callback callback;
 
-    public Flight getFlightAt(int position) {
-        return items.get(position);
-    }
+    private boolean undoOn = true; // is undo on, you can turn it on with the setUndoOn method
+    private Handler handler = new Handler(); // handler for running delayed runnables
+    private HashMap<Flight, Runnable> pendingRunnables = new HashMap<>(); // map of items to pending runnables, so we can cancel a removal if need be
+    private static final int PENDING_REMOVAL_TIMEOUT = 3000; // 3sec
 
-    public interface OnFlightRemovedListener {
-        public void onFlightRemoved(Flight flight);
-    }
-
-    public FlightAdapter(Context context, @NonNull List<Flight> items, OnClickListener listener, FlightViewHolder.Callback callback) {
+    public FlightAdapter(Context context, @NonNull List<Flight> items, FlightViewHolder.Callback callback) {
         this.items = items;
-        this.listener = listener;
         this.callback = callback;
         itemsPendingRemoval = new ArrayList<>();
 
@@ -90,7 +76,7 @@ public class FlightAdapter extends RecyclerView.Adapter {
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_view_flight, viewGroup, false);
         }
 
-        final FlightViewHolder viewHolder = new FlightViewHolder(view, imageLoader, callback);
+        final FlightViewHolder viewHolder = new FlightViewHolder(view, imageLoader);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,9 +88,19 @@ public class FlightAdapter extends RecyclerView.Adapter {
                 if (MainActivity.dualPane) {
                     notifyItemChanged(selectedPosition);
                 }
-                listener.onClick(position);
+                callback.onItemClick(position, false);
             }
         });
+        viewHolder.itemView.setLongClickable(true);
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int position = viewHolder.getAdapterPosition();
+                callback.onItemClick(position, true);
+                return true;
+            }
+        });
+
 
         return viewHolder;
     }
@@ -203,8 +199,12 @@ public class FlightAdapter extends RecyclerView.Adapter {
         return itemsPendingRemoval.contains(item);
     }
 
-    public interface OnClickListener {
-        void onClick(int position);
+    public Flight getFlightAt(int position) {
+        return items.get(position);
+    }
+
+    public interface OnFlightRemovedListener {
+        public void onFlightRemoved(Flight flight);
     }
 
 }

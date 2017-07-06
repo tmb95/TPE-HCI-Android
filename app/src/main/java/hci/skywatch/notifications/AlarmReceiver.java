@@ -45,10 +45,10 @@ public class AlarmReceiver extends BroadcastReceiver {
         for(Integer n : flightMap.keySet()) {
 
             // hardcoded notif
-            if (first) {
-                sendNotification(context, flightMap.get(n));
-                first = false;
-            }
+//            if (first) {
+//                sendNotification(context, flightMap.get(n));
+//                first = false;
+//            }
 
             final Flight current = flightMap.get(n);
 

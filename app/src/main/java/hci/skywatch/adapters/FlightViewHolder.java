@@ -18,7 +18,7 @@ import hci.skywatch.model.FlightStatus;
  * ViewHolder capable of presenting two states: "normal" and "undo" state.
  * Source: http://nemanjakovacevic.net/blog/english/2016/01/12/recyclerview-swipe-to-delete-no-3rd-party-lib-necessary
  */
-public class FlightViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+public class FlightViewHolder extends RecyclerView.ViewHolder {
     NetworkImageView airlineLogoImageView;
     TextView nameTextView;
     TextView fromToTextView;
@@ -28,13 +28,12 @@ public class FlightViewHolder extends RecyclerView.ViewHolder implements View.On
     TextView deleted;
 
     private ImageLoader imageLoader;
-    private Callback callback;
 
     public interface Callback {
         void onItemClick(int position, boolean longClick);
     }
 
-    public FlightViewHolder(View view, ImageLoader imageLoader, Callback callback) {
+    public FlightViewHolder(View view, ImageLoader imageLoader) {
         super(view);
         airlineLogoImageView = (NetworkImageView) itemView.findViewById(R.id.airline_logo);
         nameTextView = (TextView) itemView.findViewById(R.id.flight_name);
@@ -45,7 +44,6 @@ public class FlightViewHolder extends RecyclerView.ViewHolder implements View.On
         deleted = (TextView) itemView.findViewById(R.id.action);
 
         this.imageLoader = imageLoader;
-        this.callback = callback;
     }
 
     //show/hide all items but the undo button
@@ -76,16 +74,4 @@ public class FlightViewHolder extends RecyclerView.ViewHolder implements View.On
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        int position = getAdapterPosition();
-        callback.onItemClick(position, false);
-    }
-
-    @Override
-    public boolean onLongClick(View v) {
-        int position = getAdapterPosition();
-        callback.onItemClick(position, true);
-        return true;
-    }
 }

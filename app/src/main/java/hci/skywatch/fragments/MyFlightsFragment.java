@@ -60,12 +60,12 @@ import static hci.skywatch.network.FlightStatusResponse.BASE_URL_PART_2;
 /**
  * Source: http://nemanjakovacevic.net/blog/english/2016/01/12/recyclerview-swipe-to-delete-no-3rd-party-lib-necessary
  */
-public class MyFlightsFragment extends Fragment implements FlightAdapter.OnClickListener, DataBase.OnFlightUpdatedListener, FlightViewHolder.Callback {
+public class MyFlightsFragment extends Fragment implements DataBase.OnFlightUpdatedListener, FlightViewHolder.Callback {
 
     private FlightAdapter adapter;
     private FlightSearchAdapter searchAdapter;
 
-    private List<Flight> myFlights; // TODO remove, all changes on the flight list should be done on adapter
+    private List<Flight> myFlights;
     private CustomRecyclerView recyclerView;
 
     private OnFlightSelectedListener callback;
@@ -101,7 +101,7 @@ public class MyFlightsFragment extends Fragment implements FlightAdapter.OnClick
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myFlights = new ArrayList<>();
-        adapter = new FlightAdapter(getActivity(), myFlights, this, this);
+        adapter = new FlightAdapter(getActivity(), myFlights, this);
     }
 
     @Nullable
@@ -145,11 +145,7 @@ public class MyFlightsFragment extends Fragment implements FlightAdapter.OnClick
         MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                if (searchAdapter == null) {
-                    searchAdapter = new FlightSearchAdapter(getActivity(), myFlights, MyFlightsFragment.this);
-                } else {
-                    searchAdapter.setItems(myFlights);
-                }
+                searchAdapter = new FlightSearchAdapter(getActivity(), myFlights, MyFlightsFragment.this);
                 recyclerView.setAdapter(searchAdapter);
                 showToast("Search Started");
                 setSwipeEnabled(false);
@@ -160,6 +156,7 @@ public class MyFlightsFragment extends Fragment implements FlightAdapter.OnClick
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 showToast("Search Finished");
                 recyclerView.setAdapter(adapter);
+                searchAdapter = null;
                 setSwipeEnabled(true);
                 return true;
             }
@@ -168,7 +165,9 @@ public class MyFlightsFragment extends Fragment implements FlightAdapter.OnClick
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             public boolean onQueryTextChange(String newText) {
                 Log.d("AppBar", "onQueryTextChange -> " + newText);
-                searchAdapter.getFilter().filter(newText);
+                if (searchAdapter != null) {
+                    searchAdapter.getFilter().filter(newText);
+                }
                 return true;
             }
 
@@ -225,7 +224,7 @@ public class MyFlightsFragment extends Fragment implements FlightAdapter.OnClick
         }
 
         detailsView = !detailsView;
-        adapter = new FlightAdapter(getContext(), myFlights, this, this);
+        adapter = new FlightAdapter(getContext(), myFlights, this);
         setupRecyclerView();
     }
 
@@ -264,7 +263,6 @@ public class MyFlightsFragment extends Fragment implements FlightAdapter.OnClick
             requestQueue.cancelAll(REQUEST_TAG);
         }
     }
-
 
     public void setSwipeEnabled(boolean enabled) {
         swipeEnabled = enabled;
@@ -337,16 +335,18 @@ public class MyFlightsFragment extends Fragment implements FlightAdapter.OnClick
     }
 
     @Override
-    public void onClick(int position) {
-        // Notify the parent activity of selected item
-        Flight clickedFlight = adapter.getFlightAt(position);
-        String flightJson = new Gson().toJson(clickedFlight);
-        callback.onFlightSelected(position, flightJson);
-    }
-
-    @Override
     public void onItemClick(int position, boolean longClick) {
-        //TODO this method should replace the one above
+        if (!longClick) {
+            // Notify the parent activity of selected item
+            Flight clickedFlight;
+            if (searchAdapter != null) {
+                clickedFlight = searchAdapter.getFlightAt(position);
+            } else {
+                clickedFlight = adapter.getFlightAt(position);
+            }
+            String flightJson = new Gson().toJson(clickedFlight);
+            callback.onFlightSelected(position, flightJson);
+        }
     }
 
     public void addAll(List<Flight> flights) {
@@ -425,7 +425,7 @@ public class MyFlightsFragment extends Fragment implements FlightAdapter.OnClick
                     update.add(response.getFlight());
                     if (update.isReady()) {
                         myFlights = update.getUpdatedList();
-                        adapter = new FlightAdapter(getActivity(), myFlights, MyFlightsFragment.this, MyFlightsFragment.this);
+                        adapter = new FlightAdapter(getActivity(), myFlights, MyFlightsFragment.this);
                         setupRecyclerView();
                         progressDialog.dismiss();
                         Toast.makeText(getActivity(), "Update finished", Toast.LENGTH_SHORT).show();

@@ -36,7 +36,7 @@ public class FlightSearchAdapter extends SearchAdapter<Flight> {
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_view_flight, viewGroup, false);
         }
 
-        final FlightViewHolder viewHolder = new FlightViewHolder(view, imageLoader, callback);
+        final FlightViewHolder viewHolder = new FlightViewHolder(view, imageLoader);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +48,16 @@ public class FlightSearchAdapter extends SearchAdapter<Flight> {
                 if (MainActivity.dualPane) {
                     notifyItemChanged(selectedPosition);
                 }
-                //listener.onClick(position);
+                callback.onItemClick(position, false);
+            }
+        });
+        viewHolder.itemView.setLongClickable(true);
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int position = viewHolder.getAdapterPosition();
+                callback.onItemClick(position, true);
+                return true;
             }
         });
 
